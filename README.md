@@ -18,13 +18,15 @@ Base: `golang:1.26.1-alpine`, version từng công cụ là `ARG` trong `Dockerf
 
 ```yaml
 go-tools:
-  image: ghcr.io/phillong97254/go-tools:v1.0.0
+  image: phillong2504/go-tools:v1.0.0
   build:
     context: https://github.com/phillong97254/go-tools.git#v1.0.0
 ```
 
-Lần đầu chạy `make migrate` / `make gen-proto`, Docker tự build image từ git tag `v1.0.0` của repo này
-(không cần registry). Muốn tải sẵn image thay vì build thì push lên ghcr: `make docker-login && make push`.
+Image được push lên Docker Hub (`phillong2504/go-tools`), nên lần đầu `make migrate` / `make gen-proto`
+Docker chỉ việc pull. Nếu không pull được thì Docker tự build từ git tag `v1.0.0` của repo này.
+
+Push image mới lên Docker Hub: `make docker-login && make push TAG=v1.0.0`.
 
 ## Cập nhật
 
